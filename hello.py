@@ -1,5 +1,5 @@
 from datetime import datetime
-from flask import Flask, request
+from flask import Flask, render_template
 from flask_bootstrap import Bootstrap
 from flask_moment import Moment
 
@@ -27,4 +27,3 @@ def index():
 @app.route('/user/<name>')
 def user(name):
     return render_template('user.html', name=name)
-    
