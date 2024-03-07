@@ -24,18 +24,20 @@ def index():
      return render_template('index.html', current_time=datetime.utcnow())
 
 
-@app.route('/user/<name>')
-def user(name):
-    return render_template('user.html', name=name)
+@app.route('/user/<name>/<prontuario>/<institution>')
+def user(name, prontuario, institution):
+    return render_template('user.html', 
+                           name=name, 
+                           prontuario=prontuario,
+                           institution=institution);
 
-@app.route('/aluno/<nome>/<prontuario>/<inst>')
-def aluno(nome, prontuario, inst):
-    return render_template('identificacao.html', nome=nome, prontuario=prontuario, inst=inst)
-
-@app.route('/contextorequisicao/<nome>')
-def contextorequisicao(nome):
+@app.route('/contextorequisicao/<name>')
+def contextorequisicao(name):
     user_agent = request.headers.get('User-Agent');
-    agent      = "{}".format(user_agent);
-    ip         = "{}".format(request.remote_addr);
-    host       = "{}".format(request.host);
-    return render_template('contextorequisicao.html', nome=nome, agent=agent, ip=ip, host=host)
+    remote_addr = request.remote_addr;
+    remote_host = request.host;
+    return render_template('contexto.html',
+                           name=name, 
+                           user_agent=user_agent, 
+                           remote_addr=remote_addr,
+                           remote_host=remote_host);
